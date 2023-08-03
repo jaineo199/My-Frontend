@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { POST } from "../utils/webService";
 import { FETCH_ALL_MOVIES } from "../utils/apiUrls";
 
@@ -15,6 +15,17 @@ const Movies = () => {
         console.log(err);
       });
   };
+
+  const LazyImage = ({ src, alt }: any) => {
+    return (
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy" // Add lazy loading attribute
+      />
+    );
+  };
+
   return (
     <div>
       <h1>Movies</h1>
@@ -31,12 +42,12 @@ const Movies = () => {
           return (
             <div key={index}>
               <h1>{movie?.originalTitleText?.text}</h1>
-              <img
-                src={movie?.primaryImage?.url}
-                alt=""
-                width="300px"
-                height="300px"
-              />
+              <Suspense fallback={<div>Loading...</div>}>
+                <LazyImage
+                  src={movie?.primaryImage?.url}
+                  alt={movie?.originalTitleText?.text}
+                />
+              </Suspense>
             </div>
           );
         })}
