@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { POST } from "../utils/webService";
+import { SIGN_UP } from "../utils/apiUrls";
 
 interface IFormData {
   firstName: string;
@@ -27,8 +29,19 @@ const Signup: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Send the form data to the backend using an API call or other methods
-    console.log(formData);
+    POST(SIGN_UP, {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phoneNumber: formData.phoneNumber,
+      email: formData.email,
+      password: formData.password,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
