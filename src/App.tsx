@@ -1,29 +1,27 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./routes/root";
-import ErrorPage from "./routes/error-page";
-import Contact from "./routes/contact";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "contacts/:contactId",
-        element: <Contact />,
-      },
-    ],
-  },
-]);
-
+import { Route, Routes, Link, useRoutes } from "react-router-dom";
+import Home from "./pages/Home";
+import BookList from "./pages/BookList";
+import { Book } from "./pages/Book";
+import NewBook from "./pages/NewBook";
+import BooksLayout from "./pages/BooksLayout";
+import BookSidebar from "./pages/BookSidebar";
 const App = () => {
-  return (
-    <div>
-      <RouterProvider router={router} />
-    </div>
-  );
+  const element = useRoutes([
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "/books",
+      children: [
+        { index: true, element: <BookList /> },
+        { path: ":id", element: <Book /> },
+      ],
+    },
+  ]);
+
+  return element;
 };
 
 export default App;
