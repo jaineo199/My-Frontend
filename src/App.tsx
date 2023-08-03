@@ -3,14 +3,17 @@ import { Route, Routes, Link, useRoutes } from "react-router-dom";
 import Home from "./pages/Home";
 import BookList from "./pages/BookList";
 import { Book } from "./pages/Book";
-import NewBook from "./pages/NewBook";
-import BooksLayout from "./pages/BooksLayout";
-import BookSidebar from "./pages/BookSidebar";
+import Signup from "./pages/Signup";
+
 const App = () => {
   const element = useRoutes([
     {
       path: "/",
       element: <Home />,
+    },
+    {
+      path: "/auth/signup",
+      element: <Signup />,
     },
     {
       path: "/books",
