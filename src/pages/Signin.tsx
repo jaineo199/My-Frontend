@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import { POST } from "../utils/webService";
-import { SIGN_UP } from "../utils/apiUrls";
+import { SIGN_IN } from "../utils/apiUrls";
 import { useNavigate } from "react-router-dom";
 interface IFormData {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
   email: string;
   password: string;
 }
 
 const Signup: React.FC = () => {
   const [formData, setFormData] = useState<IFormData>({
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
     email: "",
     password: "",
   });
@@ -31,16 +25,15 @@ const Signup: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    POST(SIGN_UP, {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      phoneNumber: formData.phoneNumber,
+    POST(SIGN_IN, {
       email: formData.email,
       password: formData.password,
     })
       .then((res) => {
-        if (res?.status === 201) {
-          navigate("/auth/signin");
+        console.log(res);
+        if (res?.status === 200) {
+          localStorage.setItem("token", res.data.token);
+          navigate("/movies");
         }
       })
       .catch((err) => {
@@ -54,58 +47,6 @@ const Signup: React.FC = () => {
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="firstName"
-          >
-            First Name
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        {/* Add other input fields for lastName, phoneNumber, email, and password here */}
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="lastName"
-          >
-            Last Name
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="phoneNumber"
-          >
-            Phone Number
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="text"
-            id="phoneNumber"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"

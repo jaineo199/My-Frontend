@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import BookList from "./pages/BookList";
 import { Book } from "./pages/Book";
 import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
 
 const App = () => {
   const element = useRoutes([
@@ -14,6 +15,10 @@ const App = () => {
     {
       path: "/auth/signup",
       element: <Signup />,
+    },
+    {
+      path: "/auth/signin",
+      element: <Signin />,
     },
     {
       path: "/books",
