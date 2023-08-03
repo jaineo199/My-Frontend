@@ -5,6 +5,7 @@ import BookList from "./pages/BookList";
 import { Book } from "./pages/Book";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
+import Movies from "./pages/Movies";
 
 const App = () => {
   const element = useRoutes([
@@ -26,6 +27,10 @@ const App = () => {
         { index: true, element: <BookList /> },
         { path: ":id", element: <Book /> },
       ],
+    },
+    {
+      path: "/movies",
+      element: <Movies />,
     },
   ]);
 

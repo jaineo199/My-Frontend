@@ -7,7 +7,7 @@ axios.defaults.baseURL = BASE_URL;
 const createHeader = (_URL: string, options = {}) => {
   let header = {
     Accept: "/",
-    Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    Authorization: "Bearer " + localStorage.getItem("token"),
   };
   options = { ...options, headers: header };
   return { URL: _URL, options: options };
