@@ -6,6 +6,7 @@ import { Book } from "./pages/Book";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Movies from "./pages/Movies";
+import Chat from "./pages/Chat";
 
 const App = () => {
   const element = useRoutes([
@@ -31,6 +32,10 @@ const App = () => {
     {
       path: "/movies",
       element: <Movies />,
+    },
+    {
+      path: "/chat",
+      element: <Chat />,
     },
   ]);
 
